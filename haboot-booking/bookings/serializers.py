@@ -29,3 +29,25 @@ class LSASearchResultSerializer(serializers.ModelSerializer):
             "overlapping_bookings",
         ]
     
+    
+    
+class BookingCreateSerializer(serializers.Serializer):
+    parent_id=serializers.IntegerField()
+    lsa_id=serializers.IntegerField()
+    child_name=serializers.CharField(max_length=100)
+    skill=serializers.CharField(max_length=50)
+    start_time=serializers.DateTimeField()
+    end_time=serializers.DateTimeField()
+    def validate(self,attrs):
+            if attrs['start_time']>=attrs["end_time"]:
+                raise serializers.ValidationError(
+                    "start_time must be before end time."
+                )
+            return attrs
+    
+    
+class PaymentWebHookSerializer(serializers.Serializer):
+    external_payment_id=serializers.CharField(max_length=100)
+    status=serializers.ChoiceField(
+        choices=["SUCCESS","FAILED"]
+    )
