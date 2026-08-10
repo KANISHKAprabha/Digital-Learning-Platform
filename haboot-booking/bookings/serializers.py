@@ -9,7 +9,7 @@ class LSASearchSerializer(serializers.Serializer):
     def validate(self,attrs):
         if attrs['start_time']>=attrs["end_time"]:
             raise serializers.ValidationError(
-                "start_time must be before end time."
+                "start_time must be before end_time."
             )
         return attrs
     
@@ -41,7 +41,7 @@ class BookingCreateSerializer(serializers.Serializer):
     def validate(self,attrs):
             if attrs['start_time']>=attrs["end_time"]:
                 raise serializers.ValidationError(
-                    "start_time must be before end time."
+                    "start_time must be before end_time."
                 )
             return attrs
     
